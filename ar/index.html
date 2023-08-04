@@ -1,0 +1,601 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8" />
+		<meta
+			name="viewport"
+			content="width=device-width, height=device-height, initial-scale=1.0, minimum-scale=1.0, user-scalable=no, shrink-to-fit=yes"
+		/>
+		<title>BIDV AR CARD</title>
+		<link rel="stylesheet" href="TemplateData/style.css" />
+		<link rel="icon" href="TemplateData/favi.png" />
+		<style>
+			html {
+				height: -webkit-fill-available;
+			}
+			body {
+				margin: 0;
+				padding: 0;
+				min-height: 100vh;
+				min-height: -webkit-fill-available;
+				width: 100vw;
+				overflow: hidden;
+			}
+			.ctaDiv {
+				display: flex;
+				flex-direction: column;
+				align-items: center;
+				justify-content: center;
+				position: absolute;
+				left: 0;
+				right: 0;
+				top: 0;
+				bottom: 0;
+				background: #fffa;
+				z-index: 99;
+			}
+			@font-face {
+				font-family: 'icomoon';
+				src: url('data:application/x-font-ttf;charset=utf-8;base64,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')
+					format('truetype');
+				font-weight: normal;
+				font-style: normal;
+				font-display: block;
+			}
+			[class^='icon-'],
+			[class*=' icon-'] {
+				font-family: 'icomoon';
+				speak: none;
+				font-style: normal;
+				font-weight: normal;
+				font-variant: normal;
+				text-transform: none;
+				line-height: 1;
+				/* Better Font Rendering =========== */
+				-webkit-font-smoothing: antialiased;
+				-moz-osx-font-smoothing: grayscale;
+			}
+			.icon-spinner:before {
+				content: '\e000';
+			}
+			.icon-spinner-2:before {
+				content: '\e001';
+			}
+			.icon-spinner-3:before {
+				content: '\e002';
+			}
+			.icon-spinner-4:before {
+				content: '\e003';
+			}
+			.icon-spinner-5:before {
+				content: '\e004';
+			}
+			.icon-spinner-6:before {
+				content: '\e005';
+			}
+			.icon-spinner-7:before {
+				content: '\e006';
+			}
+			@keyframes anim-rotate {
+				0% {
+					transform: rotate(0);
+				}
+				100% {
+					transform: rotate(360deg);
+				}
+			}
+			.spinner {
+				display: inline-block;
+				font-size: 4em;
+				height: 1em;
+				line-height: 1;
+				margin: 0.5em;
+				animation: anim-rotate 2s infinite linear;
+				color: #fff;
+				text-shadow: 0 0 0.25em rgba(255, 255, 255, 0.3);
+			}
+			.spinner--steps {
+				animation: anim-rotate 1s infinite steps(8);
+			}
+			.spinner--steps2 {
+				animation: anim-rotate 1s infinite steps(12);
+			}
+			body {
+				font-family: sans-serif;
+				color: #ccc;
+				line-height: 1.5;
+				font-size: 1em;
+				background: #181818;
+			}
+			.talign-center {
+				text-align: center;
+			}
+			a,
+			a:visited {
+				text-decoration: none;
+				color: #444;
+				text-shadow: 0 1px 2px rgba(0, 0, 0, 0.3);
+				transition: color 0.3s;
+			}
+			a:hover,
+			a:active {
+				color: #ccc;
+			}
+			footer {
+				margin-top: 2em;
+			}
+			/* CSS cho panel */
+			.panel {
+				position: fixed;
+				top: 0;
+				left: 0;
+				width: 100%;
+				height: 100%;
+				background-color: rgba(0, 0, 0, 0.5);
+				/* Màu đen với độ mờ 50% */
+				z-index: 9999;
+				/* Đảm bảo panel nằm trên các phần tử khác */
+				display: none;
+			}
+			/* CSS cho popup */
+			.popup {
+				color: #000000;
+				position: fixed;
+				top: 50%;
+				left: 50%;
+				transform: translate(-50%, -50%);
+				width: 300px;
+				padding: 20px;
+				background-color: #f1f1f1;
+				border: 1px solid #ccc;
+				border-radius: 5px;
+				box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+				text-align: center;
+				z-index: 10000;
+				/*Đảm bảo popup nằm trên panel */
+				display: none;
+			}
+			/* CSS cho tiêu đề */
+			.popup h2 {
+				margin-top: 0;
+			}
+			/* CSS cho nút đóng */
+			.popup button {
+				background-color: #4caf50;
+				color: white;
+				border: none;
+				padding: 10px 20px;
+				text-align: center;
+				text-decoration: none;
+				display: inline-block;
+				font-size: 16px;
+				border-radius: 5px;
+				cursor: pointer;
+			}
+			#progress-bar {
+				width: 100%;
+				height: 5px;
+				border: 1px solid #000000;
+				background-color: #000000;
+				position: fixed;
+				top: 0;
+			}
+			#progress {
+				width: 0;
+				height: 100%;
+				background-color: #4caf50;
+				position: absolute; /* Thêm thuộc tính position */
+				left: 0; /* Thêm thuộc tính left */
+				top: 0; /* Thêm thuộc tính top */
+				transition: width 0.5s ease-in-out; /* Thêm hiệu ứng chuyển động */
+			}
+		</style>
+		<script
+			async
+			src="https://www.googletagmanager.com/gtag/js?id=G-CY4RWLZDBT"
+		></script>
+		<script>
+			window.dataLayer = window.dataLayer || [];
+			function gtag() {
+				dataLayer.push(arguments);
+			}
+			gtag('js', new Date());
+			gtag('config', 'G-CY4RWLZDBT');
+		</script>
+		<script>
+			function checkAndRedirect() {
+				function isAndroid() {
+					var ua = navigator.userAgent.toLowerCase();
+					var isAndroid = ua.indexOf('android') > -1;
+					return isAndroid;
+				}
+				if (isAndroid()) {
+					window.location = '/ar/bidv/dev-android/test/';
+				}
+			}
+		</script>
+	</head>
+	<body>
+		<!--IMAGETARGETS-->
+		<imagetarget id='discovery' src='targets/discovery.jpeg'></imagetarget>
+		<imagetarget id='discovery2' src='targets/discovery2.jpeg'></imagetarget>
+		<imagetarget id='flexi' src='targets/flexi.jpeg'></imagetarget>
+		<imagetarget id='infinite' src='targets/infinite.jpeg'></imagetarget>
+		<imagetarget id='infinite2' src='targets/infinite2.jpeg'></imagetarget>
+		<imagetarget id='inspire' src='targets/inspire.jpeg'></imagetarget>
+		<imagetarget id='prepaid' src='targets/prepaid.jpeg'></imagetarget>
+		<imagetarget id='ready' src='targets/ready.jpeg'></imagetarget>
+		<imagetarget id='ultimate' src='targets/ultimate.jpeg'></imagetarget>
+		<imagetarget id='infinite5' src='targets/infinite5.jpeg'></imagetarget>
+		<imagetarget id='infinite6' src='targets/infinite6.jpeg'></imagetarget>
+		<imagetarget id='infinite7' src='targets/infinite7.jpeg'></imagetarget>
+		<imagetarget id='indinite8' src='targets/indinite8.jpeg'></imagetarget>
+		<imagetarget id='infinite9' src='targets/infinite9.jpeg'></imagetarget>
+		<imagetarget id='discovery3' src='targets/discovery3.jpeg'></imagetarget>
+		<imagetarget id='discovery4' src='targets/discovery4.jpeg'></imagetarget>
+		<imagetarget id='discovery5' src='targets/discovery5.jpeg'></imagetarget>
+		<imagetarget id='discovery6' src='targets/discovery6.jpeg'></imagetarget>
+		<imagetarget id='discovery7' src='targets/discovery7.jpeg'></imagetarget>
+		<imagetarget id='inspire2' src='targets/inspire2.jpeg'></imagetarget>
+		<imagetarget id='inspire3' src='targets/inspire3.jpeg'></imagetarget>
+		<imagetarget id='inspire4' src='targets/inspire4.jpeg'></imagetarget>
+		<imagetarget id='inspire5' src='targets/inspire5.jpeg'></imagetarget>
+		<imagetarget id='inspire6' src='targets/inspire6.jpeg'></imagetarget>
+		<imagetarget id='inspire7' src='targets/inspire7.jpeg'></imagetarget>
+		<imagetarget id='inspire8' src='targets/inspire8.jpeg'></imagetarget>
+		<imagetarget id='inspire9' src='targets/inspire9.jpeg'></imagetarget>
+		<imagetarget id='inspire10' src='targets/inspire10.jpeg'></imagetarget>
+		<imagetarget id='prepaid1' src='targets/prepaid1.jpeg'></imagetarget>
+		<imagetarget id='prepaid2' src='targets/prepaid2.jpeg'></imagetarget>
+		<imagetarget id='prepaid3' src='targets/prepaid3.jpeg'></imagetarget>
+		<imagetarget id='prepaid4' src='targets/prepaid4.jpeg'></imagetarget>
+		<imagetarget id='prepaid5' src='targets/prepaid5.jpeg'></imagetarget>
+		<imagetarget id='prepaid6' src='targets/prepaid6.jpeg'></imagetarget>
+		<imagetarget id='prepaid7' src='targets/prepaid7.jpeg'></imagetarget>
+		<imagetarget id='ready2' src='targets/ready2.jpeg'></imagetarget>
+		<imagetarget id='ready3' src='targets/ready3.jpeg'></imagetarget>
+		<imagetarget id='ready4' src='targets/ready4.jpeg'></imagetarget>
+		<imagetarget id='ready5' src='targets/ready5.jpeg'></imagetarget>
+		<imagetarget id='ready6' src='targets/ready6.jpeg'></imagetarget>
+		<imagetarget id='ultimate4' src='targets/ultimate4.jpeg'></imagetarget>
+		<imagetarget id='ultimate5' src='targets/ultimate5.jpeg'></imagetarget>
+		<imagetarget id='ultimate6' src='targets/ultimate6.jpeg'></imagetarget>
+		<imagetarget id='ultimate7' src='targets/ultimate7.jpeg'></imagetarget>
+		<imagetarget id='ultimate8' src='targets/ultimate8.jpeg'></imagetarget>
+		<imagetarget id='ultimate9' src='targets/ultimate9.jpeg'></imagetarget>
+		<imagetarget id='ultimate10' src='targets/ultimate10.jpeg'></imagetarget>
+		<imagetarget id='ultimate11' src='targets/ultimate11.jpeg'></imagetarget>
+		<imagetarget id='ultimate12' src='targets/ultimate12.jpeg'></imagetarget>
+		<imagetarget id='ultimate13' src='targets/ultimate13.jpeg'></imagetarget>
+		<imagetarget id='ultimate14' src='targets/ultimate14.jpeg'></imagetarget>
+		<imagetarget id='ultimate15' src='targets/ultimate15.jpg'></imagetarget>
+		<imagetarget id='ultimate16' src='targets/ultimate16.jpg'></imagetarget>
+		<imagetarget id='ultimate17' src='targets/ultimate17.jpg'></imagetarget>
+		<imagetarget id='ultimate18' src='targets/ultimate18.jpg'></imagetarget>
+		<imagetarget id='ultimate19' src='targets/ultimate19.jpg'></imagetarget>
+		<imagetarget id='ultimate20' src='targets/ultimate20.jpg'></imagetarget>
+		<imagetarget id='ultimate22' src='targets/ultimate22.jpg'></imagetarget>
+		<imagetarget id='ultimate21' src='targets/ultimate21.jpg'></imagetarget>
+		<imagetarget id='indinite10' src='targets/indinite10.jpg'></imagetarget>
+		<imagetarget id='indinite11' src='targets/indinite11.jpg'></imagetarget>
+		<imagetarget id='infinite12' src='targets/infinite12.jpg'></imagetarget>
+		<imagetarget id='prepaid8' src='targets/prepaid8.jpeg'></imagetarget>
+		<imagetarget id='prepaid9' src='targets/prepaid9.jpeg'></imagetarget>
+		<imagetarget id='prepaid10' src='targets/prepaid10.jpeg'></imagetarget>
+		<imagetarget id='prepaid11' src='targets/prepaid11.jpeg'></imagetarget>
+		<imagetarget id='prepaid12' src='targets/prepaid12.jpeg'></imagetarget>
+		<imagetarget id='prepaid13' src='targets/prepaid13.jpeg'></imagetarget>
+		<imagetarget id='prepaid14' src='targets/prepaid14.jpeg'></imagetarget>
+		<imagetarget id='prepaid15' src='targets/prepaid15.jpeg'></imagetarget>
+		<imagetarget id='infinite13' src='targets/infinite13.jpeg'></imagetarget>
+		<imagetarget id='infinite14' src='targets/infinite14.jpeg'></imagetarget>
+		<imagetarget id='infinite15' src='targets/infinite15.jpeg'></imagetarget>
+		<imagetarget id='infinite16' src='targets/infinite16.jpeg'></imagetarget>
+		<imagetarget id='infinite17' src='targets/infinite17.jpeg'></imagetarget>
+		<imagetarget id='infinite18' src='targets/infinite18.jpeg'></imagetarget>
+		<imagetarget id='smart1' src='targets/smart1.jpeg'></imagetarget>
+		<imagetarget id='smart2' src='targets/smart2.jpeg'></imagetarget>
+		<imagetarget id='smart3' src='targets/smart3.jpeg'></imagetarget>
+		<imagetarget id='smart4' src='targets/smart4.jpeg'></imagetarget>
+		<imagetarget id='smart5' src='targets/smart5.jpeg'></imagetarget>
+		<imagetarget id='smart6' src='targets/smart6.jpeg'></imagetarget>
+		<imagetarget id='smart7' src='targets/smart7.jpeg'></imagetarget>
+		<imagetarget id='smart8' src='targets/smart8.jpeg'></imagetarget>
+		<imagetarget id='cashback360_1' src='targets/cashback360_1.jpeg'></imagetarget>
+		<imagetarget id='cashbackonline1' src='targets/cashbackonline1.jpeg'></imagetarget>
+		<imagetarget id='easy1' src='targets/easy1.jpeg'></imagetarget>
+		<imagetarget id='cashbackonline2' src='targets/cashbackonline2.jpeg'></imagetarget>
+		<imagetarget id='ultimate23' src='targets/ultimate23.jpeg'></imagetarget>
+		<imagetarget id='ultimate24' src='targets/ultimate24.jpeg'></imagetarget>
+		<imagetarget id='prepaid16' src='targets/prepaid16.jpeg'></imagetarget>
+		<imagetarget id='prepaid17' src='targets/prepaid17.jpeg'></imagetarget>
+		<imagetarget id='prepaid18' src='targets/prepaid18.jpeg'></imagetarget>
+		<imagetarget id='cashback360_2' src='targets/cashback360_2.jpeg'></imagetarget>
+		<imagetarget id='ultimate25' src='targets/ultimate25.jpg'></imagetarget>
+		<imagetarget id='ultimate26' src='targets/ultimate26.jpg'></imagetarget>
+		<imagetarget id='ultimate27' src='targets/ultimate27.jpg'></imagetarget>
+		<imagetarget id='ultimate28' src='targets/ultimate28.jpg'></imagetarget>
+
+		<video
+			id="webcam-video"
+			muted
+			autoplay
+			playsinline
+			style="width: 1px; position: absolute"
+		></video>
+		<div id="startARDiv" class="ctaDiv" style="background: #231f20">
+			<select
+				id="chooseCamSel"
+				onchange="SelectCam()"
+				style="display: none"
+			></select>
+			<img
+				style="text-align: center; width: 60vw"
+				src="TemplateData/Logo_BIDV.png"
+			/>
+			<p style="color: #ffc62f; text-transform: uppercase; font-size: 14px">
+				Trải nghiệm ar cùng BIDV
+			</p>
+			<div id="progress-bar">
+				<div id="progress"></div>
+			</div>
+			<div
+				id="loading"
+				class="spinner spinner--steps icon-spinner"
+				aria-hidden="true"
+				style="display: none; margin-top: 40%"
+			></div>
+			<button
+				id="startARButton"
+				onclick="StartAR()"
+				style="
+					display: none;
+					border-radius: 20px;
+					margin-top: 40%;
+					border: none;
+					padding: 4% 8%;
+					width: 150px;
+					background: linear-gradient(94.41deg, #efda87 -1.34%, #006c65 88.53%);
+					color: white;
+					font-weight: 900;
+				"
+			>
+				KHỞI ĐỘNG
+			</button>
+			<div id="myPanel" class="panel"></div>
+			<div id="myPopup" class="popup">
+				<h2>Liên kết cần được mở trên Chrome hoặc Safari</h2>
+				<p>Bạn có muốn mở liên kết không?</p>
+				<button onclick="openInSystemBrowser()">Mở</button>
+			</div>
+		</div>
+		<!-- ENABLE THIS FOR WECHAT -->
+		<!-- <div id="startWebcamManuallyDiv" style="display: none" class="ctaDiv">
+        <button onclick="StartCameraManually()" style="width:180px; height:40px; border:1px solid gray; border-radius:8px">START WEBCAM</button>
+    </div> -->
+		<div id="errorDiv" class="ctaDiv" style="display: none; background: #aaa">
+			<p
+				id="errorText"
+				style="text-align: center; width: 60vw; color: white"
+			></p>
+		</div>
+		<div id="unity-container" class="unity-mobile">
+			<canvas
+				id="unity-canvas"
+				style="width: 100%; height: 100%; background: #0000; z-index: -99"
+			></canvas>
+			<!--        <div id="unity-loading-bar">-->
+			<!--            <div id="unity-logo"></div>-->
+			<!--            <div id="unity-progress-bar-empty">-->
+			<!--                <div id="unity-progress-bar-full"></div>-->
+			<!--            </div>-->
+			<!--        </div>-->
+			<canvas id="video-canvas"></canvas>
+		</div>
+		<script>
+			function detectInAppBrowser(ua) {
+				ua = ua.toLowerCase().trim();
+				const isIOS =
+					ua.includes('iphone') || ua.includes('ipod') || ua.includes('ipad');
+				const isAndroid = ua.includes('android');
+				// iOS Chrome
+				if (ua.includes('zalo') || ua.includes('fb')) {
+					if (ua.includes('android')) {
+						return 'is_app_android';
+					} else {
+						return 'is_app_ios';
+					}
+				}
+				return null;
+			}
+			const userAgent = navigator.userAgent || navigator.vendor;
+			const detection = detectInAppBrowser(userAgent);
+			const popup = document.getElementById('myPopup');
+			const panel = document.getElementById('myPanel');
+			if (detection) {
+				panel.style.display = 'block';
+				popup.style.display = 'block';
+			}
+			function openInSystemBrowser() {
+				const userAgent = navigator.userAgent || navigator.vendor;
+				if (detectInAppBrowser(userAgent) == 'is_app_android') {
+					// Android
+					const androidDeepLink = `intent://tour.vrplus.com.vn/ar/bidv/uat/#Intent;scheme=https;package=com.android.chrome;end`;
+					window.location.href = androidDeepLink;
+				} else if (detectInAppBrowser(userAgent) == 'is_app_ios') {
+					// iOS
+					const iosDeepLinkChrome =
+						'googlechromes://tour.vrplus.com.vn/ar/bidv/uat/';
+					window.location.href = iosDeepLinkChrome;
+				} else {
+					// Other devices, open in default browser
+					// window.location.href = websiteUrl;
+				}
+			}
+		</script>
+		<script src="itracker.js" type="text/javascript"></script>
+		<script>
+			var unityCanvas = document.querySelector('#unity-canvas');
+			var videoCanvas = document.querySelector('#video-canvas');
+			window.iTracker = new ImageTracker(unityCanvas, videoCanvas);
+			window.iTracker
+				.initialize()
+				.then(async () => {
+					console.log('ImageTracker initialized!');
+					await LoadWebcams();
+				})
+				.catch((error) => {
+					console.error(
+						'Failed to initialize ImageTracker. Are you missing opencv.js?'
+					);
+					ShowError('Failed to initialize the experience.');
+				});
+		</script>
+		<script src="Build/uat.loader.js"></script>
+		<script>
+					var container = document.querySelector('#unity-container');
+					var canvas = document.querySelector('#unity-canvas');
+					var buttonBar = document.querySelector('#startARButton');
+					var loadingBar = document.querySelector('#loading');
+					// var progressBarFull = document.querySelector("#unity-progress-bar-full");
+					window.onload = function() {
+			  var progressBar = document.getElementById('progress');
+			  var progress = 5;
+			  var interval = setInterval(increaseProgress, 50);
+			  function increaseProgress() {
+			    if (progress >= 100) {
+					document.getElementById('startARButton').style.display= "block";
+					document.getElementById('progress-bar').style.display = 'none';
+					clearInterval(interval);
+			    } else {
+			      progress++;
+			      progressBar.style.width = progress + '%';
+			    }
+			  }
+			};
+					function StartAR() {
+						canvas.style.width = window.innerWidth + 'px';
+						canvas.style.height = window.innerHeight + 'px';
+						buttonBar.style.display = 'none';
+						loadingBar.style.display = 'block';
+						var audio = new Audio('TemplateData/sound.aac');
+						audio.play();
+						setInterval(()=>{
+							audio.play();
+						},57000);
+						createUnityInstance(document.querySelector("#unity-canvas"), {
+					                  dataUrl: "Build/uat.data.unityweb",
+					                  frameworkUrl: "Build/uat.framework.js.unityweb",
+					                  codeUrl: "Build/uat.wasm.unityweb",
+					                  streamingAssetsUrl: "StreamingAssets",
+					                  companyName: "DefaultCompany",
+					                  productName: "NewARGame",
+					                  productVersion: "0.1",
+					                  webglContextAttributes: { "preserveDrawingBuffer": true },
+					                  // matchWebGLToCanvasSize: false, // Uncomment this to separately control WebGL canvas render size and DOM element size.
+					                  // devicePixelRatio: 1, // Uncomment this to override low DPI rendering on high DPI displays.
+					                  },
+					(progress) => {
+						// progressBarFull.style.width = 100 * progress + "%";
+					}
+							).then((unityInstance) => {
+						window.unityInstance = unityInstance;
+						StartWebcam();
+						document.getElementById('startARDiv').style.display = 'none';
+						loadingBar.style.display = 'none';
+						//ENABLE THIS FOR WECHAT
+						//[FIX]: some browsers (such as Wechat) does not allow webcam autoplay so we need to start the webcam manually via new button press
+						// window.waitForVideo = () => {
+						//     setTimeout(() => {
+						//         if (!window.iTracker.VIDEO) {
+						//             window.waitForVideo();
+						//         }
+						//         else if (window.iTracker.VIDEO.currentTime <= 0) {
+						//             document.getElementById("startWebcamManuallyDiv").style.display = "flex";
+						//         }
+						//     }, 2500)
+						// };
+						// window.waitForVideo();
+					});
+						}
+					window.WEBCAM_SETTINGS = {
+						video: {
+							facingMode: 'environment',
+						},
+						audio: false,
+					};
+					async function StartWebcam() {
+						try {
+							var stream = await navigator.mediaDevices.getUserMedia(
+								window.WEBCAM_SETTINGS
+							);
+							const video = document.querySelector('#webcam-video');
+							video.srcObject = stream;
+							iTracker.startWebcam(video);
+							try {
+								await iTracker.startWebcam(video);
+								console.log('Webcam started successfully');
+							} catch (err) {
+								console.error('Webcam failed to start - ', err);
+								ShowError('Failed to start the experience. Webcam failed to start');
+							}
+						} catch (err) {
+							console.log('getUserMedia Error', err);
+							ShowError(
+								'Failed to start the experience. Camera permission was denied'
+							);
+						}
+					}
+					async function LoadWebcams() {
+						let backCams = [];
+						let devices = await navigator.mediaDevices.enumerateDevices();
+						devices.forEach((mediaDevice) => {
+							if (
+								mediaDevice.kind === 'videoinput' &&
+								!mediaDevice.label.includes('facing front')
+							) {
+								backCams.push(mediaDevice);
+							}
+						});
+						var select = document.getElementById('chooseCamSel');
+						select.style.display = 'none';
+						var count = 0;
+						//reverse array because some Android phones can't distinguish front and back cams at first load
+						//and when this happens, most of the time, front cam goes first and back cam goes last
+						backCams = backCams.reverse();
+						backCams.forEach((mediaDevice) => {
+							const option = document.createElement('option');
+							option.value = mediaDevice.deviceId;
+							let label = `Camera ${count}`;
+							if (mediaDevice.label) {
+								label = mediaDevice.label;
+							}
+							const textNode = document.createTextNode(label);
+							option.appendChild(textNode);
+							select.appendChild(option);
+							count++;
+						});
+						iTracker.WEBCAM_NAME = select.options[select.selectedIndex].innerHTML;
+					}
+					function SelectCam() {
+						var select = document.getElementById('chooseCamSel');
+						window.deviceId = select.value;
+						window.WEBCAM_SETTINGS.video['deviceId'] = deviceId;
+						//console.log(window.WEBCAM_SETTINGS);
+						iTracker.WEBCAM_NAME = select.options[select.selectedIndex].innerHTML;
+					}
+					function ShowError(error) {
+						document.getElementById('errorDiv').style.display = 'flex';
+						document.getElementById('errorText').innerHTML = error;
+					}
+					function getURL() {
+						return window.location.href;
+					}
+						//ENABLE THIS FOR WECHAT
+						// function StartCameraManually() {
+						//     document.getElementById("startWebcamManuallyDiv").style.display = "none";
+						//     iTracker.VIDEO.play()
+						// }
+		</script>
+	</body>
+</html>
